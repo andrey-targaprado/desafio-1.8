@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
-public class Carrinho implements Checagem {
+public class Carrinho {
 
     private ArrayList<Produto> carrinhoCompras = new ArrayList<>();
     private Produto produto;
     private int totalQuantidade = 0;
     private double totalPreco = 0;
-    private Descontos desconto;
 
     public Carrinho(Produto produto){
         adicionarCompra(produto);
@@ -45,13 +44,30 @@ public class Carrinho implements Checagem {
 
  }
 
-public void setDesconto(Descontos desconto) {
-    this.desconto = desconto;
+public void setDesconto(double desconto) {
+    totalPreco = totalPreco * desconto;
+    System.out.println(totalPreco);
 }
 
-@Override
-public void checarDesconto() {
-    
+public void checarDesconto(){
+        
+    if(this.totalQuantidade > 15){
+        this.setDesconto(0.9);
+        System.out.println("Desconto de 10% ");
+
+    } else if (this.totalQuantidade > 10 && this.totalQuantidade <= 15) {
+        this.setDesconto(0.92);
+        System.out.println("Desconto de 8% ");
+
+    } else if (this.totalQuantidade > 5 && this.totalQuantidade <= 10) {
+        this.setDesconto(0.95);
+        System.out.println("Desconto de 5% ");
+
+    } else {
+        this.setDesconto(1);
+        System.out.println("Sem desconto ");
+    }
+
 }
 
 }
